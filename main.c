@@ -3,6 +3,8 @@
 #include <unistd.h>
 #include <string.h>
 
+#define maxProcessCount 10
+
 int main(int argc, char *argv[])
 {
 	if (argc != 4)
@@ -10,7 +12,7 @@ int main(int argc, char *argv[])
 	else
 	{
 		int K = atoi(argv[1]), N = atoi(argv[2]), n = atoi(argv[3]);
-		int count = n * K, stat;
+		int count = 0, stat;
 		char bufi[10], bufj[10];
 		for (int i = 0; i<K; ++i)
 			for (int j = 0; j<n; ++j)
@@ -19,6 +21,15 @@ int main(int argc, char *argv[])
 					snprintf (bufi, sizeof(bufi), "%d",i);
 					snprintf (bufj, sizeof(bufj), "%d",j);
 					execl("31.out", "31.out", argv[3], bufi, bufj, argv[2], 0);
+				}
+				else
+				{
+					++count;
+					while (count >= maxProcessCount)
+					{
+						wait(&stat);
+						--count;
+					}
 				}
 		while (count-- > 0)
 			wait(&stat);
