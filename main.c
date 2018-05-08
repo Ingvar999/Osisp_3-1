@@ -25,6 +25,8 @@ int main(int argc, char *argv[])
 				else
 				{
 					++count;
+					if (count == 5)
+						system("ps fax");
 					while (count >= maxProcessCount)
 					{
 						wait(&stat);

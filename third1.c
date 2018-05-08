@@ -8,15 +8,18 @@
 
 int main(int argc, char *argv[])
 {
+	//sleep(1);
 	int n = atoi(argv[1]), i = atoi(argv[2]), j = atoi(argv[3]), N = atoi(argv[4]), pid;//это идентификатор процесса (число)
 	
 	int k = j*2 + 1;
 	int sign = (j & 1) * (-2) + 1;
 	float x = (float)(2*Pi*i)/N;
-	while (x>Pi/2)
-		x -= Pi/2;
-	while (x<Pi/(-2))
-		x += Pi/2;
+	while (x>Pi)
+		x -= 2*Pi;
+	if (x > Pi/2)
+		x = Pi - x;
+	if (x < -Pi/2)
+		x = -Pi - x;
 	long fact = 1;
 	float pow = 1;
 	for (int l = 1; l <= k; ++l)
